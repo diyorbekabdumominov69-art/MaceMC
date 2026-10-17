@@ -5,146 +5,127 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#090812">
-  <title>AI Montage | MaceMC</title>
-  <link rel="stylesheet" href="montage.css">
-  <script src="montage.js" defer></script>
+  <meta name="description" content="MaceMC — Minecraft va AI video montaj platformasi.">
+  <title>MaceMC | Minecraft Community</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="navbar">
-    <a class="logo" href="index.html">⚔ MaceMC</a>
+  <!-- NAVIGATION -->
+  <header>
+    <a class="logo" href="index.html"
+       style="text-decoration:none;">⚔ MaceMC</a>
+
     <nav>
       <a href="index.html">Bosh sahifa</a>
-      <a href="#editor">AI Montaj</a>
-      <a href="#plans">Tariflar</a>
-      <a href="#admin">Admin</a>
+      <a href="montage.html">AI Montaj</a>
+      <a href="#modes">Rejimlar</a>
+      <a href="#about">Biz haqimizda</a>
     </nav>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <span class="badge">✦ AI VIDEO STUDIO</span>
-      <h1>Videongizni <span>yangi darajaga</span> olib chiqing.</h1>
-      <p>Videoni yuklang, ingliz tilida montaj ko'rsatmasini yozing va ijod qilishni boshlang.</p>
-    </section>
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="tag">✦ MINECRAFT COMMUNITY</div>
 
-    <section class="panel" id="editor">
-      <h2>🎬 AI Montage Studio</h2>
-      <p class="muted">Video faylingizni tanlang yoki shu yerga tashlang.</p>
+      <h1>MACE<span>MC</span></h1>
 
-      <label class="dropzone" id="dropzone" for="videoFile">
-        <span class="upload-icon">↑</span>
-        <strong>Videoni shu yerga tashlang</strong>
-        <span class="muted">yoki tanlash uchun bosing</span>
-        <span class="muted">MP4, WebM, MOV — hajm brauzer imkoniyatiga bog'liq</span>
-        <input type="file" id="videoFile" accept="video/*" hidden>
-      </label>
-
-      <p id="fileInfo" class="file-info">Hali video tanlanmagan.</p>
-
-      <video id="preview" controls hidden></video>
-
-      <label for="prompt"><strong>Montaj uchun prompt (English)</strong></label>
-      <textarea id="prompt" rows="4"
-        placeholder="Example: Create a cinematic Minecraft PvP montage with smooth transitions, dramatic zooms, beat sync and purple glow effects."></textarea>
-
-      <div class="settings">
-        <div>
-          <label for="resolution">Resolution</label>
-          <select id="resolution">
-            <option value="1080">1080p</option>
-            <option value="1440">2K</option>
-            <option value="2160">4K</option>
-          </select>
-        </div>
-        <div>
-          <label for="fps">Frame rate</label>
-          <select id="fps">
-            <option value="30">30 FPS</option>
-            <option value="60" selected>60 FPS</option>
-            <option value="120">120 FPS</option>
-          </select>
-        </div>
-      </div>
-
-      <p id="status" class="status" aria-live="polite">
-        Video tanlang va prompt yozing.
+      <p>
+        Yangi sarguzashtlar, kuchli janglar va unutilmas
+        Minecraft lahzalari sizni kutmoqda.
+        O'z dunyongizni yarating!
       </p>
 
-      <button id="renderBtn" class="primary">✦ AI bilan montaj qilish</button>
-      <a id="downloadBtn" class="primary download" hidden download="MaceMC-video.mp4">⬇ Yuklab olish</a>
+      <div class="buttons">
+        <a class="primary" href="montage.html"
+           style="text-decoration:none;">
+          🎬 AI Montajni boshlash
+        </a>
 
-      <p class="note">Hozircha bu interfeys prototipi. Haqiqiy AI montaj serveri ulanmagan bo'lsa, video avtomatik tahrir qilinmaydi.</p>
-    </section>
-
-    <section id="plans" class="section">
-      <h2>Tariflaringizni tanlang</h2>
-      <p class="muted">Tarif narxlari siz bergan qiymatlar asosida ko'rsatilgan.</p>
-
-      <div class="plans">
-        <article class="plan">
-          <h3>Plus</h3>
-          <div class="price">30 <small>so'm</small></div>
-          <p>Tezkor montaj</p>
-          <p>2K / 60 FPS maqsadli sifat</p>
-          <button class="choose" data-plan="Plus">Tanlash</button>
-        </article>
-
-        <article class="plan">
-          <h3>Pro</h3>
-          <div class="price">45 <small>so'm</small></div>
-          <p>Kengaytirilgan montaj</p>
-          <p>Maxsus effektlar</p>
-          <button class="choose" data-plan="Pro">Tanlash</button>
-        </article>
-
-        <article class="plan featured">
-          <span class="badge">Tavsiya etiladi</span>
-          <h3>Ultra</h3>
-          <div class="price">60 <small>so'm</small></div>
-          <p>Professional montaj</p>
-          <p>4K / 60 FPS maqsadli sifat</p>
-          <button class="choose" data-plan="Ultra">Tanlash</button>
-        </article>
-
-        <article class="plan">
-          <h3>Ultra Pro Plus</h3>
-          <div class="price">Max</div>
-          <p>Eksklyuziv imkoniyatlar</p>
-          <p>4K / 120 FPS maqsadli sifat</p>
-          <button class="choose" data-plan="Ultra Pro Plus">Tanlash</button>
-        </article>
+        <a class="secondary" href="#modes">
+          Rejimlarni ko'rish
+        </a>
       </div>
-      <p id="selectedPlan" class="status">Tanlangan tarif: hali yo'q.</p>
     </section>
 
-    <section class="panel admin" id="admin">
-      <h2>🛡 Admin Panel</h2>
-      <p class="muted">Foydalanuvchiga tarif biriktirish interfeysi.</p>
+    <!-- MINECRAFT MODES -->
+    <section class="section" id="modes">
+      <h2>Minecraft rejimlari</h2>
 
-      <label for="adminEmail">Admin Gmail manzili</label>
-      <input id="adminEmail" type="email"
-        placeholder="Admin Gmail manzili">
+      <p>
+        MaceMC olamida o'zingizga mos sarguzashtni tanlang.
+      </p>
 
-      <label for="targetEmail">Rank beriladigan foydalanuvchi Gmail'i</label>
-      <input id="targetEmail" type="email"
-        placeholder="user@gmail.com">
+      <div class="cards">
+        <div class="card">
+          <div class="icon">⚔️</div>
+          <h3>Survival</h3>
+          <p>
+            Resurs to'plang, uy quring va Minecraft
+            olamida yashab qoling.
+          </p>
+        </div>
 
-      <label for="rank">Yangi rank</label>
-      <select id="rank">
-        <option>Plus</option>
-        <option>Pro</option>
-        <option>Ultra</option>
-        <option>Ultra Pro Plus</option>
-      </select>
+        <div class="card">
+          <div class="icon">💀</div>
+          <h3>Lifesteal</h3>
+          <p>
+            Jang qiling, raqiblaringizni yenging
+            va kuchingizni oshiring.
+          </p>
+        </div>
 
-      <button id="assignBtn" class="primary">Rankni tayinlash</button>
-      <p id="adminStatus" class="status" aria-live="polite"></p>
-      <div id="rankResults"></div>
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>PvP Arena</h3>
+          <p>
+            Mahoratingizni sinang va boshqa
+            o'yinchilar bilan jang qiling.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <p class="note">Demo rejimi: ranklar faqat ushbu brauzerda saqlanadi. Haqiqiy admin huquqi, foydalanuvchilar bazasi va to'lovlar uchun server autentifikatsiyasi zarur.</p>
+    <!-- AI MONTAGE PROMOTION -->
+    <section class="section" id="montage">
+      <div class="card" style="max-width:800px;margin:auto;text-align:center;">
+        <div class="icon">🎬</div>
+
+        <h2>AI Auto Montage</h2>
+
+        <p>
+          Minecraft PvP, Lifesteal va boshqa o'yinlaringiz
+          uchun video montaj loyihangizni boshlang.
+          Video yuklang va ingliz tilida prompt yozing.
+        </p>
+
+        <div class="buttons" style="justify-content:center;">
+          <a class="primary" href="montage.html"
+             style="text-decoration:none;">
+            AI Montaj panelini ochish →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <h2>MaceMC haqida</h2>
+
+      <p>
+        Minecraft hamjamiyati va ijodkorlar uchun
+        yaratilayotgan mustaqil loyiha.
+        Sarguzasht va montaj — bitta joyda!
+      </p>
     </section>
   </main>
 
-  <footer>© 2026 MaceMC AI Studio · Minecraft bilan bog'liq mustaqil loyiha</footer>
+  <footer>
+    © 2026 MaceMC. Barcha huquqlar himoyalangan.
+    <br><br>
+    Not an official Minecraft product.
+  </footer>
 </body>
 </html>
