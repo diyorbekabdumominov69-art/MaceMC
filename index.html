@@ -4,57 +4,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090812">
-  <title>MaceMC | Minecraft Community</title>
+  <meta name="theme-color" content="#080b14">
+  <title>MaceMC — AI Video Studio</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="navbar">
-    <a class="logo" href="index.html"><span>M</span> MaceMC</a>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="logo">M</span> MaceMC</a>
     <nav>
-      <a href="index.html">Bosh sahifa</a>
+      <a href="#features">Imkoniyatlar</a>
+      <a href="#plans">Tariflar</a>
       <a href="montage.html">AI Montaj</a>
-      <a href="#modes">Rejimlar</a>
-      <a href="auth.html" class="register-btn">Register / Login</a>
-      <a href="auth.html" id="accountLink" class="account-link hidden">Hisobim</a>
     </nav>
+    <div class="nav-actions">
+      <a class="btn secondary" href="auth.html">Kirish</a>
+      <a class="btn primary" href="auth.html?mode=register">Boshlash</a>
+    </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="badge">MINECRAFT COMMUNITY</div>
-      <h1>MACE<span>MC</span></h1>
-      <p>Minecraft sarguzashtlari va AI video montaj — barchasi bir joyda.</p>
-      <div class="buttons">
-        <a class="primary" href="montage.html">🎬 AI Montaj</a>
-        <a class="secondary" href="auth.html">Hisob yaratish</a>
+      <div class="pill"><span class="dot"></span> AI VIDEO CREATOR</div>
+      <h1>Videolaringizni<br> <span class="gradient">yangi darajaga</span> olib chiqing.</h1>
+      <p class="lead">
+        MaceMC — videolarni tayyorlash, AI montaj loyihalarini boshqarish
+        va ijodiy g‘oyalaringizni amalga oshirish uchun platforma.
+      </p>
+      <div class="hero-actions">
+        <a href="auth.html?mode=register" class="btn primary big">Bepul boshlash ↗</a>
+        <a href="#features" class="btn secondary big">Imkoniyatlarni ko‘rish</a>
+      </div>
+      <div class="hero-note">Oddiy interfeys · Video loyihalar · Tariflar</div>
+
+      <div class="preview">
+        <div class="preview-head">
+          <div><span class="dot"></span> MaceMC Studio</div>
+          <span class="muted">VIDEO WORKSPACE</span>
+        </div>
+        <div class="preview-body">
+          <aside class="preview-side">
+            <div class="side-active">▣ Dashboard</div>
+            <div>◈ AI Montaj</div>
+            <div>▤ Loyihalar</div>
+            <div>⚙ Sozlamalar</div>
+          </aside>
+          <div class="preview-main">
+            <div class="preview-title">Ijodingizni boshlang</div>
+            <div class="preview-cards">
+              <div class="mini-card"><span>✦</span><b>AI Montaj</b><small>Video loyihasi</small></div>
+              <div class="mini-card"><span>▶</span><b>Render</b><small>Video eksporti</small></div>
+              <div class="mini-card"><span>▤</span><b>Fayllar</b><small>Loyihalaringiz</small></div>
+            </div>
+            <div class="timeline">
+              <div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="modes">
-      <h2>Minecraft rejimlari</h2>
-      <p class="muted">O'zingizga mos sarguzashtni tanlang.</p>
-      <div class="cards">
-        <article class="card">
-          <div class="icon">⚔️</div>
-          <h3>Survival</h3>
-          <p>Resurs to'plang, uy quring va yashab qoling.</p>
+    <section class="section" id="features">
+      <div class="section-heading">
+        <span class="eyebrow">IMKONIYATLAR</span>
+        <h2>Kontentingiz uchun bitta joy</h2>
+        <p>Kerakli vositalar bir platformada.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-icon">✦</span><h3>AI yordamida montaj</h3><p>Video uchun montaj rejasini tayyorlash va moslashtirish.</p></article>
+        <article class="feature-card"><span class="feature-icon">▶</span><h3>Video render</h3><p>Server sozlangach, tayyor videolarni render qilish va yuklab olish.</p></article>
+        <article class="feature-card"><span class="feature-icon">▣</span><h3>Loyiha boshqaruvi</h3><p>Video ishlaringizni bir joyda tartibga soling.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="section-heading">
+        <span class="eyebrow">TARIFLAR</span>
+        <h2>O‘zingizga mos tarifni tanlang</h2>
+        <p>Narxlar va limitlar serverda ham tekshirilishi kerak.</p>
+      </div>
+      <div class="plan-grid">
+        <article class="plan-card">
+          <h3>Plus</h3><div class="price">30 000 <small>so‘m / oy</small></div>
+          <p>Kontent yaratuvchilar uchun.</p>
+          <ul><li>Video loyihalari</li><li>Asosiy AI funksiyalari</li><li>Standart render navbati</li></ul>
+          <a class="btn secondary full" href="auth.html?rank=Plus">Plus tanlash</a>
         </article>
-        <article class="card">
-          <div class="icon">💀</div>
-          <h3>Lifesteal</h3>
-          <p>Jang qiling va kuchli o'yinchiga aylaning.</p>
+        <article class="plan-card featured">
+          <span class="plan-label">OMMABOP</span>
+          <h3>Pro</h3><div class="price">Narx belgilanadi <small>/ oy</small></div>
+          <p>Faol video yaratuvchilar uchun.</p>
+          <ul><li>Kengaytirilgan limitlar</li><li>AI montaj vositalari</li><li>Ustuvor render navbati</li></ul>
+          <a class="btn primary full" href="auth.html?rank=Pro">Pro tanlash</a>
         </article>
-        <article class="card">
-          <div class="icon">🏆</div>
-          <h3>PvP Arena</h3>
-          <p>Mahoratingizni boshqa o'yinchilar bilan sinang.</p>
+        <article class="plan-card">
+          <h3>Ultra</h3><div class="price">Narx belgilanadi <small>/ oy</small></div>
+          <p>Katta loyihalar uchun.</p>
+          <ul><li>Yuqori limitlar</li><li>Kengaytirilgan vositalar</li><li>Ustuvor xizmat</li></ul>
+          <a class="btn secondary full" href="auth.html?rank=Ultra">Ultra tanlash</a>
         </article>
       </div>
+    </section>
+
+    <section class="cta">
+      <h2>Keyingi videongizni yarating.</h2>
+      <p>MaceMC bilan ijodingizni boshlang.</p>
+      <a class="btn primary big" href="auth.html?mode=register">Hisob yaratish ↗</a>
     </section>
   </main>
 
-  <footer>© 2026 MaceMC · Mustaqil Minecraft loyihasi</footer>
+  <footer><a class="brand" href="index.html"><span class="logo">M</span> MaceMC</a><span>© 2026 MaceMC Studio</span></footer>
+  <script src="script.js"></script>
 </body>
 </html>
