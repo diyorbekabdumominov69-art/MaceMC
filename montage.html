@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <title>AI Video Montaj | MaceMC</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="montage.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="logo">M</span> MaceMC
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="btn secondary">Bosh sahifa</a>
+      <button id="logoutButton" class="btn secondary" type="button">Chiqish</button>
+    </div>
+  </header>
+
+  <main class="studio">
+    <div class="studio-header">
+      <div>
+        <span class="eyebrow">MACE STUDIO</span>
+        <h1 style="font-size:40px;letter-spacing:-1px">AI Video Montaj</h1>
+        <p class="muted">Videongizni yuklang va montaj loyihasini boshlang.</p>
+      </div>
+      <div class="pill">VIDEO WORKSPACE</div>
+    </div>
+
+    <div class="studio-grid">
+      <section class="studio-panel">
+        <h2>Yangi loyiha</h2>
+
+        <form id="renderForm">
+          <label for="videoTitle">Loyiha nomi</label>
+          <input
+            id="videoTitle"
+            name="title"
+            type="text"
+            maxlength="100"
+            placeholder="Mening birinchi videom"
+            required
+          >
+
+          <label for="videoFile">Video fayl</label>
+          <input
+            id="videoFile"
+            name="video"
+            type="file"
+            accept="video/*"
+            required
+          >
+
+          <label for="instructions">AI uchun topshiriq</label>
+          <textarea
+            id="instructions"
+            name="instructions"
+            maxlength="2000"
+            placeholder="Masalan: keraksiz pauzalarni olib tashlash, dinamik montaj va subtitrlar..."
+          ></textarea>
+
+          <label for="quality">Video sifati</label>
+          <select id="quality" name="quality">
+            <option value="720p">720p HD</option>
+            <option value="1080p">1080p Full HD</option>
+          </select>
+
+          <button
+            id="renderButton"
+            class="btn primary full"
+            type="submit"
+          >
+            ✦ Montajni boshlash
+          </button>
+        </form>
+
+        <div id="renderStatus" class="status" role="status" aria-live="polite">
+          Video yuklashga tayyor.
+        </div>
+      </section>
+
+      <section class="studio-panel">
+        <h2>Loyihalarim</h2>
+        <p class="muted">Render vazifalari va tayyor videolar shu yerda ko‘rinadi.</p>
+        <div id="jobList" class="job-list">
+          Loyihalar yuklanmoqda...
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html">
+      <span class="logo">M</span> MaceMC
+    </a>
+    <span>© 2026 MaceMC Studio</span>
+  </footer>
+
+  <script src="montage.js"></script>
+  <script>
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+      try {
+        await fetch("/api/auth/logout", {
+          method: "POST",
+          credentials: "include"
+        });
+      } catch (error) {
+        console.error("Server bilan aloqa uzildi.");
+      }
+      location.href = "auth.html";
+    });
+  </script>
+</body>
+</html>
