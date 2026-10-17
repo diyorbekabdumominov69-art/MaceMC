@@ -3,129 +3,58 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090812">
-  <meta name="description" content="MaceMC — Minecraft va AI video montaj platformasi.">
   <title>MaceMC | Minecraft Community</title>
-
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <!-- NAVIGATION -->
-  <header>
-    <a class="logo" href="index.html"
-       style="text-decoration:none;">⚔ MaceMC</a>
-
+  <header class="navbar">
+    <a class="logo" href="index.html"><span>M</span> MaceMC</a>
     <nav>
       <a href="index.html">Bosh sahifa</a>
       <a href="montage.html">AI Montaj</a>
       <a href="#modes">Rejimlar</a>
-      <a href="#about">Biz haqimizda</a>
+      <a href="auth.html" class="register-btn">Register / Login</a>
+      <a href="auth.html" id="accountLink" class="account-link hidden">Hisobim</a>
     </nav>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="tag">✦ MINECRAFT COMMUNITY</div>
-
+    <section class="hero">
+      <div class="badge">MINECRAFT COMMUNITY</div>
       <h1>MACE<span>MC</span></h1>
-
-      <p>
-        Yangi sarguzashtlar, kuchli janglar va unutilmas
-        Minecraft lahzalari sizni kutmoqda.
-        O'z dunyongizni yarating!
-      </p>
-
+      <p>Minecraft sarguzashtlari va AI video montaj — barchasi bir joyda.</p>
       <div class="buttons">
-        <a class="primary" href="montage.html"
-           style="text-decoration:none;">
-          🎬 AI Montajni boshlash
-        </a>
-
-        <a class="secondary" href="#modes">
-          Rejimlarni ko'rish
-        </a>
+        <a class="primary" href="montage.html">🎬 AI Montaj</a>
+        <a class="secondary" href="auth.html">Hisob yaratish</a>
       </div>
     </section>
 
-    <!-- MINECRAFT MODES -->
     <section class="section" id="modes">
       <h2>Minecraft rejimlari</h2>
-
-      <p>
-        MaceMC olamida o'zingizga mos sarguzashtni tanlang.
-      </p>
-
+      <p class="muted">O'zingizga mos sarguzashtni tanlang.</p>
       <div class="cards">
-        <div class="card">
+        <article class="card">
           <div class="icon">⚔️</div>
           <h3>Survival</h3>
-          <p>
-            Resurs to'plang, uy quring va Minecraft
-            olamida yashab qoling.
-          </p>
-        </div>
-
-        <div class="card">
+          <p>Resurs to'plang, uy quring va yashab qoling.</p>
+        </article>
+        <article class="card">
           <div class="icon">💀</div>
           <h3>Lifesteal</h3>
-          <p>
-            Jang qiling, raqiblaringizni yenging
-            va kuchingizni oshiring.
-          </p>
-        </div>
-
-        <div class="card">
+          <p>Jang qiling va kuchli o'yinchiga aylaning.</p>
+        </article>
+        <article class="card">
           <div class="icon">🏆</div>
           <h3>PvP Arena</h3>
-          <p>
-            Mahoratingizni sinang va boshqa
-            o'yinchilar bilan jang qiling.
-          </p>
-        </div>
+          <p>Mahoratingizni boshqa o'yinchilar bilan sinang.</p>
+        </article>
       </div>
-    </section>
-
-    <!-- AI MONTAGE PROMOTION -->
-    <section class="section" id="montage">
-      <div class="card" style="max-width:800px;margin:auto;text-align:center;">
-        <div class="icon">🎬</div>
-
-        <h2>AI Auto Montage</h2>
-
-        <p>
-          Minecraft PvP, Lifesteal va boshqa o'yinlaringiz
-          uchun video montaj loyihangizni boshlang.
-          Video yuklang va ingliz tilida prompt yozing.
-        </p>
-
-        <div class="buttons" style="justify-content:center;">
-          <a class="primary" href="montage.html"
-             style="text-decoration:none;">
-            AI Montaj panelini ochish →
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <h2>MaceMC haqida</h2>
-
-      <p>
-        Minecraft hamjamiyati va ijodkorlar uchun
-        yaratilayotgan mustaqil loyiha.
-        Sarguzasht va montaj — bitta joyda!
-      </p>
     </section>
   </main>
 
-  <footer>
-    © 2026 MaceMC. Barcha huquqlar himoyalangan.
-    <br><br>
-    Not an official Minecraft product.
-  </footer>
+  <footer>© 2026 MaceMC · Mustaqil Minecraft loyihasi</footer>
 </body>
 </html>
