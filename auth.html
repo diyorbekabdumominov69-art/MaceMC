@@ -2,297 +2,135 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MaceMC | Hisob</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Arial,sans-serif;color:white;background:#090b0e}
-.bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(90deg,#090b0ef5 0%,#090b0edb 28%,#090b0e50 100%),url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=85") center/cover}
-header{display:flex;align-items:center;justify-content:space-between;padding:25px 8%}
-.brand{color:white;text-decoration:none;font-size:17px;font-weight:bold}
-.brand b{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#91c5ff;color:#101827;margin-right:7px}
-header a:last-child{color:#09111d;background:#91c5ff;padding:11px 18px;border-radius:9px;text-decoration:none;font-size:13px;font-weight:bold}
-main{width:min(390px,88%);margin:105px 8% 40px}
-h1{font-size:34px;font-weight:500;margin:0 0 8px}
-.sub,.hint,.foot{color:#9ca9bc;font-size:12px;line-height:1.7}
-form{margin-top:27px}
-input{width:100%;padding:15px;margin-bottom:10px;border:1px solid #303238;border-radius:12px;background:#1b1d20e8;color:white;outline:none}
-input:focus{border-color:#91c5ff}
-button{cursor:pointer;border:0;border-radius:10px;padding:14px;font-weight:bold}
-.primary{width:100%;background:#91c5ff;color:#08111d;margin-top:14px}
-.primary:hover{background:#b5d8ff}
-.switch{font-size:12px;color:#a8b4c7;margin-top:22px}
-.link{background:none;padding:0;color:#91c5ff}
-.hidden{display:none!important}
-#message{font-size:13px;line-height:1.6;color:#91c5ff;overflow-wrap:anywhere}
-.admin{margin-top:25px;padding:18px;background:#121722;border:1px solid #34445c;border-radius:12px}
-.admin h2{font-size:20px}
-.admin label{display:block;margin:15px 0 8px;font-size:13px}
-.admin select{width:100%;padding:12px;background:#1b1d20;color:white;border:1px solid #303238;border-radius:9px}
-.usercard{margin-top:20px;padding:18px;border:1px solid #30384a;background:#121722;border-radius:12px}
-.usercard p{font-size:13px;color:#b8c4d8;overflow-wrap:anywhere}
-.foot{margin-top:75px}
-@media(max-width:600px){header{padding:22px 6%}main{margin:75px auto 35px}h1{font-size:30px}.foot{margin-top:45px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kirish va ro‘yxatdan o‘tish — MaceMC</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="montage.css">
 </head>
-<body>
-<div class="bg"></div>
+<body class="auth-page">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="logo">M</span> MaceMC</a>
+    <a href="index.html" class="btn secondary">← Bosh sahifa</a>
+  </header>
 
-<header>
-  <a href="index.html" class="brand"><b>M</b>MaceMC</a>
-  <a href="#register" id="topRegister">Register ↗</a>
-</header>
+  <main class="auth-wrap">
+    <section class="auth-card">
+      <div class="pill">MaceMC ACCOUNT</div>
+      <h1 id="authTitle">Hisobingizga kiring</h1>
+      <p class="muted" id="authDescription">Loyihalaringizni davom ettiring.</p>
 
-<main>
-  <section id="registerView">
-    <h1>Ro'yxatdan o'tish</h1>
-    <p class="sub">MaceMC hisobingizni yarating.</p>
-    <form id="registerForm">
-      <input id="regName" placeholder="Foydalanuvchi nomi" minlength="3" maxlength="24" required>
-      <input id="regEmail" type="email" placeholder="Elektron pochta" required>
-      <input id="regPassword" type="password" placeholder="Parol (kamida 8 belgi)" minlength="8" required>
-      <input id="regConfirm" type="password" placeholder="Parolni tasdiqlang" minlength="8" required>
-      <p class="hint">Kamida 8 ta belgidan foydalaning.</p>
-      <button class="primary">Hisob yaratish</button>
-    </form>
-    <p class="switch">Hisobingiz bormi?
-      <button class="link" type="button" onclick="showLogin()">Kirish</button>
-    </p>
-  </section>
+      <div class="auth-switch">
+        <button id="loginTab" class="active" type="button">Kirish</button>
+        <button id="registerTab" type="button">Ro‘yxatdan o‘tish</button>
+      </div>
 
-  <section id="loginView" class="hidden">
-    <h1>Kirish</h1>
-    <p class="sub">MaceMC hisobingizga kiring.</p>
-    <form id="loginForm">
-      <input id="loginEmail" type="email" placeholder="Elektron pochta" required>
-      <input id="loginPassword" type="password" placeholder="Parol" required>
-      <button class="primary">Kirish</button>
-    </form>
-    <p class="switch">Hisobingiz yo'qmi?
-      <button class="link" type="button" onclick="showRegister()">Ro'yxatdan o'tish</button>
-    </p>
-  </section>
+      <form id="authForm">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="siz@example.com" required>
 
-  <section id="accountView" class="hidden">
-    <h1>Xush kelibsiz!</h1>
-    <p class="sub">MaceMC hisobingizga muvaffaqiyatli kirdingiz.</p>
-    <div class="usercard">
-      <p>Foydalanuvchi: <strong id="accountName"></strong></p>
-      <p>Email: <strong id="accountEmail"></strong></p>
-      <p>Rank: <strong id="accountRank">Member</strong></p>
-    </div>
+        <label for="password">Parol</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" placeholder="Kamida 8 ta belgi" required>
 
-    <section id="adminPanel" class="admin hidden">
-      <h2>🛡 MaceMC Admin</h2>
-      <p class="sub">Foydalanuvchilarga rank belgilash.</p>
-      <form id="rankForm">
-        <label for="targetEmail">Foydalanuvchi emaili</label>
-        <input id="targetEmail" type="email" placeholder="user@example.com" required>
-        <label for="rankSelect">Rank</label>
-        <select id="rankSelect">
-        <select id="rankSelect">
-  <option>Plus</option>
-  <option>Pro</option>
-  <option>Ultra</option>
-  <option>Member</option>
-</select>
-        </select>
-        <button class="primary">Rank belgilash</button>
+        <div id="rankWrap" hidden>
+          <label for="rank">Tarif tanlang</label>
+          <select id="rank" name="rank">
+            <option value="Free">Free</option>
+            <option value="Plus">Plus</option>
+            <option value="Pro">Pro</option>
+            <option value="Ultra">Ultra</option>
+          </select>
+          <p class="muted small-text">Tarifni tanlash to‘lovni amalga oshirmaydi va pullik obunani faollashtirmaydi.</p>
+        </div>
+
+        <button id="submitButton" class="btn primary full auth-submit" type="submit">Kirish</button>
+        <p id="authMessage" class="form-message" role="status"></p>
       </form>
-      <p id="adminMessage" class="sub"></p>
-      <div id="usersList"></div>
+
+      <p class="muted small-text">Parolingizni hech kimga bermang. Admin huquqlari faqat serverda tekshiriladi.</p>
     </section>
+  </main>
 
-    <button id="logout" class="primary">Chiqish</button>
-  </section>
+  <script>
+  "use strict";
 
-  <p id="message" aria-live="polite"></p>
-  <p class="foot">MaceMC · Minecraft Community</p>
-</main>
+  const form = document.getElementById("authForm");
+  const title = document.getElementById("authTitle");
+  const description = document.getElementById("authDescription");
+  const loginTab = document.getElementById("loginTab");
+  const registerTab = document.getElementById("registerTab");
+  const rankWrap = document.getElementById("rankWrap");
+  const message = document.getElementById("authMessage");
+  const submitButton = document.getElementById("submitButton");
+  let mode = new URLSearchParams(location.search).get("mode") === "register"
+    ? "register" : "login";
 
-<script>
-"use strict";
-
-const ADMIN_EMAIL = "diyorbekabdumominov69@gmail.com";
-const USERS_KEY = "macemc_demo_users";
-const SESSION_KEY = "macemc_demo_session";
-
-const $ = id => document.getElementById(id);
-
-function getUsers() {
-  try {
-    return JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
-  } catch {
-    return {};
+  const requestedRank = new URLSearchParams(location.search).get("rank");
+  if (["Free", "Plus", "Pro", "Ultra"].includes(requestedRank)) {
+    document.getElementById("rank").value = requestedRank;
+    mode = "register";
   }
-}
 
-function saveUsers(users) {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
+  function setMode(nextMode) {
+    mode = nextMode;
+    const registering = mode === "register";
+    title.textContent = registering ? "Yangi hisob yarating" : "Hisobingizga kiring";
+    description.textContent = registering
+      ? "MaceMC bilan ijodingizni boshlang."
+      : "Loyihalaringizni davom ettiring.";
+    submitButton.textContent = registering ? "Hisob yaratish" : "Kirish";
+    rankWrap.hidden = !registering;
+    loginTab.classList.toggle("active", !registering);
+    registerTab.classList.toggle("active", registering);
+    document.getElementById("password").autocomplete =
+      registering ? "new-password" : "current-password";
+    message.textContent = "";
+  }
 
-function show(view) {
-  ["registerView", "loginView", "accountView"].forEach(id => {
-    $(id).classList.toggle("hidden", id !== view);
+  loginTab.addEventListener("click", () => setMode("login"));
+  registerTab.addEventListener("click", () => setMode("register"));
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    message.textContent = "";
+    submitButton.disabled = true;
+    submitButton.textContent = "Kuting...";
+
+    const body = {
+      email: document.getElementById("email").value.trim(),
+      password: document.getElementById("password").value,
+      rank: document.getElementById("rank").value
+    };
+
+    try {
+      const response = await fetch(
+        mode === "register" ? "/api/auth/register" : "/api/auth/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        }
+      );
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || "So‘rov bajarilmadi. Server sozlamalarini tekshiring.");
+      }
+
+      message.textContent = "Muvaffaqiyatli! Sahifaga yo‘naltirilmoqda...";
+      location.href = "montage.html";
+    } catch (error) {
+      message.textContent = error.message.includes("Failed to fetch")
+        ? "Server ulanmagan. Backend serverni ishga tushiring."
+        : error.message;
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = mode === "register" ? "Hisob yaratish" : "Kirish";
+    }
   });
-  $("message").textContent = "";
-  $("topRegister").classList.toggle("hidden", view === "accountView");
-}
 
-function showRegister() {
-  show("registerView");
-}
-
-function showLogin() {
-  show("loginView");
-}
-
-function openAccount(email) {
-  const users = getUsers();
-  const user = users[email];
-
-  if (!user) {
-    localStorage.removeItem(SESSION_KEY);
-    showLogin();
-    $("message").textContent = "Avval ro'yxatdan o'ting.";
-    return;
-  }
-
-  show("accountView");
-  $("accountName").textContent = user.name;
-  $("accountEmail").textContent = email;
-  $("accountRank").textContent = user.rank || "Member";
-
-  const isAdmin = email === ADMIN_EMAIL;
-  $("adminPanel").classList.toggle("hidden", !isAdmin);
-
-  if (isAdmin) renderUsers();
-}
-
-$("registerForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = $("regName").value.trim();
-  const email = $("regEmail").value.trim().toLowerCase();
-  const password = $("regPassword").value;
-  const confirm = $("regConfirm").value;
-
-  if (password !== confirm) {
-    $("message").textContent = "Parollar bir xil emas.";
-    return;
-  }
-
-  const users = getUsers();
-
-  if (users[email]) {
-    $("message").textContent =
-      "Bu email allaqachon ro'yxatdan o'tgan. Kirish bo'limidan foydalaning.";
-    return;
-  }
-
-  users[email] = {
-    name,
-    // Faqat demo! Bu parolni xavfsiz saqlash usuli emas.
-    password,
-    rank: email === ADMIN_EMAIL ? "Admin" : "Member"
-  };
-
-  saveUsers(users);
-  localStorage.setItem(SESSION_KEY, email);
-
-  // Ro'yxatdan so'ng darhol hisob ochiladi.
-  openAccount(email);
-});
-
-$("loginForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const email = $("loginEmail").value.trim().toLowerCase();
-  const password = $("loginPassword").value;
-  const users = getUsers();
-
-  if (!users[email]) {
-    $("message").textContent =
-      "Bu email ro'yxatdan o'tmagan. Avval Register qiling.";
-    return;
-  }
-
-  if (users[email].password !== password) {
-    $("message").textContent = "Parol noto'g'ri.";
-    return;
-  }
-
-  localStorage.setItem(SESSION_KEY, email);
-  openAccount(email);
-});
-
-$("logout").addEventListener("click", () => {
-  localStorage.removeItem(SESSION_KEY);
-  showLogin();
-});
-
-$("rankForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const current = localStorage.getItem(SESSION_KEY);
-  if (current !== ADMIN_EMAIL) {
-    $("adminMessage").textContent = "Admin ruxsati talab qilinadi.";
-    return;
-  }
-
-  const email = $("targetEmail").value.trim().toLowerCase();
-  const users = getUsers();
-
-  if (!users[email]) {
-    $("adminMessage").textContent =
-      "Bu foydalanuvchi topilmadi. Avval ro'yxatdan o'tishi kerak.";
-    return;
-  }
-
-  if (email === ADMIN_EMAIL) {
-    $("adminMessage").textContent =
-      "Admin rankini ushbu panel orqali o'zgartirib bo'lmaydi.";
-    return;
-  }
-
-  users[email].rank = $("rankSelect").value;
-  saveUsers(users);
-
-  $("adminMessage").textContent =
-    email + " uchun rank demo tarzida yangilandi.";
-
-  renderUsers();
-});
-
-function renderUsers() {
-  const users = getUsers();
-  const list = $("usersList");
-  list.replaceChildren();
-
-  Object.entries(users).forEach(([email, user]) => {
-    const item = document.createElement("div");
-    item.className = "usercard";
-
-    const name = document.createElement("p");
-    name.textContent = user.name + " — " + email;
-
-    const rank = document.createElement("p");
-    rank.textContent = "Rank: " + (user.rank || "Member");
-
-    item.append(name, rank);
-    list.appendChild(item);
-  });
-}
-
-// Shu brauzerda avval ochilgan demo sessiyasini tiklash.
-const savedSession = localStorage.getItem(SESSION_KEY);
-if (savedSession && getUsers()[savedSession]) {
-  openAccount(savedSession);
-} else {
-  localStorage.removeItem(SESSION_KEY);
-  showRegister();
-}
-</script>
+  setMode(mode);
+  </script>
 </body>
 </html>
