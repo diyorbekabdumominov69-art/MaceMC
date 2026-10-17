@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090812">
+  <meta name="description" content="MaceMC — Minecraft olamiga xush kelibsiz!">
+  <title>MaceMC | Minecraft Community</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #090812;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 8%;
+      border-bottom: 1px solid #292239;
+      background: #0d0b18;
+    }
+
+    .logo {
+      color: #b77aff;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #c8c3d5;
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #c084fc;
+    }
+
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+      background:
+        radial-gradient(ellipse at 50% 45%, #352052 0%, #171126 35%, #090812 75%);
+    }
+
+    .tag {
+      color: #d9b7ff;
+      background: #251638;
+      border: 1px solid #59347c;
+      padding: 9px 15px;
+      border-radius: 30px;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 9vw, 90px);
+      font-weight: 900;
+      letter-spacing: -3px;
+    }
+
+    h1 span {
+      color: #bd83ff;
+    }
+
+    .hero p {
+      max-width: 550px;
+      margin-top: 20px;
+      color: #b7b0c9;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button, .secondary {
+      border: none;
+      border-radius: 9px;
+      padding: 15px 23px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button {
+      background: #a855f7;
+      color: white;
+    }
+
+    button:hover {
+      background: #9333ea;
+    }
+
+    .secondary {
+      color: white;
+      background: #201a2d;
+      border: 1px solid #413351;
+    }
+
+    .section {
+      padding: 55px 8%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .section > p {
+      color: #aaa2bd;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .card {
+      padding: 27px 20px;
+      background: #14111f;
+      border: 1px solid #30253e;
+      border-radius: 14px;
+      text-align: left;
+    }
+
+    .card .icon {
+      font-size: 30px;
+      margin-bottom: 17px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aaa2bd;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid #292239;
+      padding: 25px 15px;
+      text-align: center;
+      color: #8d859e;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .section {
+        padding: 45px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">⚔ MaceMC</div>
+    <nav>
+      <a href="#home">Bosh sahifa</a>
+      <a href="#modes">Rejimlar</a>
+      <a href="#about">Biz haqimizda</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="tag">✦ MINECRAFT COMMUNITY</div>
+      <h1>MACE<span>MC</span></h1>
+      <p>
+        Yangi sarguzashtlar, kuchli janglar va unutilmas
+        Minecraft lahzalari sizni kutmoqda.
+        O'z dunyongizni yarating!
+      </p>
+
+      <div class="buttons">
+        <button onclick="copyIP()">IP manzilni nusxalash</button>
+        <a class="secondary" href="#modes">Rejimlarni ko'rish</a>
+      </div>
+    </section>
+
+    <section class="section" id="modes">
+      <h2>Bizning rejimlar</h2>
+      <p>MaceMC olamida o'zingizga mos sarguzashtni tanlang.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">⚔️</div>
+          <h3>Survival</h3>
+          <p>Resurs to'plang, uy quring va Minecraft olamida yashab qoling.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">💀</div>
+          <h3>Lifesteal</h3>
+          <p>Jang qiling, raqiblaringizni yenging va kuchingizni oshiring.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>PvP Arena</h3>
+          <p>Mahoratingizni sinang va boshqa o'yinchilar bilan jang qiling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>MaceMC haqida</h2>
+      <p>
+        Minecraft muxlislari uchun yaratilgan loyiha.
+        Sarguzasht boshlanishi uchun tayyormisiz?
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 MaceMC. Barcha huquqlar himoyalangan.
+    <br><br>
+    Not an official Minecraft product.
+  </footer>
+
+  <script>
+    async function copyIP() {
+      const serverIP = "PLAY.MACEMC.NET";
+
+      try {
+        await navigator.clipboard.writeText(serverIP);
+        alert("Server IP nusxalandi: " + serverIP);
+      } catch (error) {
+        prompt("IP manzilni nusxalang:", serverIP);
+      }
+    }
+  </script>
+</body>
+</html>
