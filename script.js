@@ -156,3 +156,41 @@ window.MaceMC = {
   isAdmin,
   assignRank
 };
+
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", event => {
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+
+  // Frontend server mavjudligini tekshiradi.
+  // Haqiqiy login va admin huquqi backend tomonidan tekshirilishi shart.
+  async function checkServer() {
+    try {
+      const response = await fetch("/api/health");
+      if (!response.ok) throw new Error("Server javob bermadi");
+      return await response.json();
+    } catch {
+      return null;
+    }
+  }
+
+  window.MaceMC = { checkServer };
+
+  const userLabel = document.querySelector("[data-user-email]");
+  if (userLabel) {
+    fetch("/api/auth/me", { credentials: "include" })
+      .then(response => response.ok ? response.json() : null)
+      .then(data => {
+        if (data?.user) userLabel.textContent = data.user.email;
+      })
+      .catch(() => {});
+  }
+});
