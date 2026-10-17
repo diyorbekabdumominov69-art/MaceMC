@@ -75,3 +75,84 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", copyIP);
     });
 });
+
+"use strict";
+
+const ADMIN_EMAIL = "diyorbekabdumominov69@gmail.com";
+const SESSION_KEY = "macemc_demo_session";
+const USERS_KEY = "macemc_demo_users";
+
+function getUsers() {
+  try {
+    return JSON.parse(localStorage.getItem(USERS_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function currentEmail() {
+  return (localStorage.getItem(SESSION_KEY) || "").toLowerCase();
+}
+
+function isAdmin(email) {
+  return email.toLowerCase() === ADMIN_EMAIL;
+}
+
+function updateNavigation() {
+  const email = currentEmail();
+  const register = document.querySelector(".register-btn");
+  const account = document.getElementById("accountLink");
+
+  if (register) {
+    register.classList.toggle("hidden", Boolean(email));
+  }
+
+  if (account) {
+    account.classList.toggle("hidden", !email);
+    account.textContent = email && isAdmin(email)
+      ? "Admin / Hisobim"
+      : "Hisobim";
+  }
+}
+
+function assignRank(email, rank) {
+  // Faqat interfeys uchun demo tekshiruvi.
+  if (!isAdmin(currentEmail())) {
+    throw new Error("Admin ruxsati yo'q.");
+  }
+
+  if (!["Plus", "Pro", "Ultra"].includes(rank)) {
+    throw new Error("Noto'g'ri rank.");
+  }
+
+  const users = getUsers();
+  const target = email.trim().toLowerCase();
+
+  if (!users[target]) {
+    throw new Error("Foydalanuvchi topilmadi.");
+  }
+
+  if (isAdmin(target)) {
+    throw new Error("Admin hisobining rankini o'zgartirib bo'lmaydi.");
+  }
+
+  users[target].rank = rank;
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateNavigation();
+
+  // Sayt ichidagi boshqa sahifalarda ham menyuni yangilash.
+  const email = currentEmail();
+  if (email) {
+    console.log("MaceMC account loaded.");
+  }
+});
+
+// Boshqa skriptlar foydalanishi uchun.
+window.MaceMC = {
+  ADMIN_EMAIL,
+  isAdmin,
+  assignRank
+};
