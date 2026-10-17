@@ -1,121 +1,97 @@
 
 "use strict";
 
-const ADMIN_EMAIL = "diyorbekabdumominov69@gmail.com";
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("renderForm");
+  if (!form) return;
 
-const videoInput = document.getElementById("videoFile");
-const dropzone = document.getElementById("dropzone");
-const preview = document.getElementById("preview");
-const fileInfo = document.getElementById("fileInfo");
-const promptInput = document.getElementById("prompt");
-const renderBtn = document.getElementById("renderBtn");
-const downloadBtn = document.getElementById("downloadBtn");
-const status = document.getElementById("status");
+  const status = document.getElementById("renderStatus");
+  const jobs = document.getElementById("jobList");
+  const button = document.getElementById("renderButton");
 
-let selectedFile = null;
-let previewUrl = null;
-
-function loadVideo(file) {
-  if (!file) return;
-
-  if (!file.type.startsWith("video/")) {
-    status.textContent = "Iltimos, video fayl tanlang.";
-    return;
+  async function api(path, options = {}) {
+    const response = await fetch(path, {
+      credentials: "include",
+      ...options
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Server xatosi.");
+    return data;
   }
 
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  async function loadJobs() {
+    try {
+      const data = await api("/api/montage/jobs");
+      jobs.replaceChildren();
 
-  selectedFile = file;
-  previewUrl = URL.createObjectURL(file);
+      if (!data.jobs?.length) {
+        jobs.textContent = "Hozircha render loyihalari yo‘q.";
+        return;
+      }
 
-  preview.src = previewUrl;
-  preview.hidden = false;
-  fileInfo.textContent =
-    file.name + " · " + (file.size / (1024 * 1024)).toFixed(1) + " MB";
+      data.jobs.forEach(job => {
+        const item = document.createElement("div");
+        item.className = "job-item";
 
-  downloadBtn.hidden = true;
-  status.textContent =
-    "Video yuklandi. Endi ingliz tilida prompt yozing.";
-}
+        const title = document.createElement("strong");
+        title.textContent = job.title || "Video loyihasi";
+        const state = document.createElement("p");
+        state.textContent = "Holat: " + (job.status || "queued");
+        item.append(title, state);
 
-videoInput.addEventListener("change", () => {
-  loadVideo(videoInput.files[0]);
-});
+        if (job.downloadUrl) {
+          const link = document.createElement("a");
+          link.href = job.downloadUrl;
+          link.textContent = "Videoni yuklab olish";
+          link.rel = "noopener";
+          item.append(link);
+        }
 
-["dragenter", "dragover"].forEach(eventName => {
-  dropzone.addEventListener(eventName, event => {
+        jobs.append(item);
+      });
+    } catch (error) {
+      jobs.textContent = error.message;
+    }
+  }
+
+  form.addEventListener("submit", async event => {
     event.preventDefault();
-    dropzone.classList.add("dragging");
+    const file = document.getElementById("videoFile").files[0];
+    if (!file) {
+      status.textContent = "Avval video faylni tanlang.";
+      return;
+    }
+
+    const maxSize = 200 * 1024 * 1024;
+    if (file.size > maxSize) {
+      status.textContent = "Video 200 MB dan katta. Kichikroq fayl tanlang.";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("video", file);
+    formData.append("title", document.getElementById("videoTitle").value.trim());
+    formData.append("instructions", document.getElementById("instructions").value.trim());
+    formData.append("quality", document.getElementById("quality").value);
+
+    button.disabled = true;
+    status.textContent = "Video serverga yuborilmoqda...";
+
+    try {
+      const result = await api("/api/montage/render", {
+        method: "POST",
+        body: formData
+      });
+      status.textContent = result.message || "Render vazifasi qabul qilindi.";
+      await loadJobs();
+    } catch (error) {
+      status.textContent = error.message.includes("Failed to fetch")
+        ? "Backend server ishlamayapti yoki manzil noto‘g‘ri."
+        : error.message;
+    } finally {
+      button.disabled = false;
+    }
   });
-});
 
-["dragleave", "drop"].forEach(eventName => {
-  dropzone.addEventListener(eventName, event => {
-    event.preventDefault();
-    dropzone.classList.remove("dragging");
-  });
-});
-
-dropzone.addEventListener("drop", event => {
-  loadVideo(event.dataTransfer.files[0]);
-});
-
-renderBtn.addEventListener("click", () => {
-  if (!selectedFile) {
-    status.textContent = "Avval video yuklang.";
-    return;
-  }
-
-  if (!promptInput.value.trim()) {
-    status.textContent = "Montaj uchun prompt yozing.";
-    promptInput.focus();
-    return;
-  }
-
-  status.textContent =
-    "Demo rejimi: AI montaj serveri ulanmagan. Hozircha asl videoni yuklab olishingiz mumkin.";
-
-  downloadBtn.href = previewUrl;
-  downloadBtn.download = "MaceMC-original-" + selectedFile.name;
-  downloadBtn.textContent = "⬇ Asl videoni yuklab olish";
-  downloadBtn.hidden = false;
-});
-
-document.querySelectorAll(".choose").forEach(button => {
-  button.addEventListener("click", () => {
-    document.getElementById("selectedPlan").textContent =
-      "Tanlangan tarif: " + button.dataset.plan +
-      ". Hozircha bu tanlov to'lov yoki obunani faollashtirmaydi.";
-  });
-});
-
-// Ushbu qism faqat namoyish uchun.
-// Brauzer ichidagi tekshiruv haqiqiy admin xavfsizligi emas.
-document.getElementById("assignBtn").addEventListener("click", () => {
-  const adminEmail = document.getElementById("adminEmail")
-    .value.trim().toLowerCase();
-  const targetEmail = document.getElementById("targetEmail")
-    .value.trim().toLowerCase();
-  const rank = document.getElementById("rank").value;
-  const adminStatus = document.getElementById("adminStatus");
-  const results = document.getElementById("rankResults");
-
-  if (adminEmail !== ADMIN_EMAIL) {
-    adminStatus.textContent = "Bu demo panelda admin email mos kelmadi.";
-    return;
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(targetEmail)) {
-    adminStatus.textContent = "To'g'ri Gmail manzilini kiriting.";
-    return;
-  }
-
-  // Haqiqiy mahsulotda bu amal serverda tekshirilishi shart.
-  const item = document.createElement("div");
-  item.className = "rank-item";
-  item.textContent = targetEmail + " — " + rank + " (demo)";
-  results.prepend(item);
-
-  adminStatus.textContent =
-    "Demo yozuvi yaratildi. Haqiqiy rank berilmadi.";
+  loadJobs();
 });
